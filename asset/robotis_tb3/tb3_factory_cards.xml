@@ -1,6 +1,6 @@
 <mujoco model="tb3_factory">
   <!-- 메인에서 meshdir을 아예 robotis_tb3/assets로 고정 -->
-  <compiler angle="radian" meshdir="/data/jinsup/js_mujoco/asset/robotis_tb3/assets" autolimits="true"/>
+  <compiler angle="radian" meshdir="/home/thj326/vla_project/asset/robotis_tb3/assets" autolimits="true"/>
 
   <include file="factory_cards.xml"/>
   <include file="tb3_burger_sensor.xml"/>

@@ -1,5 +1,4 @@
 <mujoco model="turtlebot3_burger">
-  <compiler angle="radian" meshdir="/data/jinsup/js_mujoco/asset/robotis_tb3/assets" autolimits="true"/>
 
   <option integrator="implicitfast"/>
 
@@ -22,7 +21,6 @@
     <!-- 센서용 mesh 추가 -->
     <mesh name="camera"    file="camera.stl"/>
     <mesh name="lidar"     file="lidar.stl"     scale="0.001 0.001 0.001"/>
-    <mesh name="ul_sensor" file="ul_sensor.stl"/>
   </asset>
 
   <worldbody>
@@ -41,10 +39,6 @@
         <joint name="wheel_right_joint" pos="0 0 0" axis="0 0 1"/>
         <geom quat="0.707388 0.706825 0 0" type="mesh" rgba="0.3 0.3 0.3 1" mesh="right_tire"/>
       </body>
-            <!-- IMU -->
-      <body name="imu_link" pos="0 0 0.05">
-        <site name="imu" pos="0 0 0"/>
-      </body>
 
       <!-- 카메라 (앞쪽에 장착) -->
       <body name="camera_mount" pos="0.05 0 0.15">
@@ -58,7 +52,7 @@
         </body>
       </body>
 
-      <!-- LiDAR (lds 위에 딱 얹기) -->
+      <!-- LiDAR -->
       <body name="lidar_mount" pos="-0.032 0 0.172">
         <body name="laser_link" pos="0 0 0">
           <geom type="mesh" mesh="lidar" rgba="0.1 0.1 0.1 1" pos="0 0 0"/>
@@ -71,13 +65,8 @@
           </replicate>
         </body>
       </body>
+      <site name="rf_front_site" pos="0.18 0 0.10" size="0.005" zaxis="1 0 0"/>
 
-      <!-- 초음파 센서 (앞쪽 아래쪽, 그냥 박스 기하만) -->
-      <body name="ul_sensor_mount" pos="0.05 0 0.04">
-        <body name="ul_sensor_link" pos="0 0 0">
-          <geom type="mesh" mesh="ul_sensor" rgba="0.07 0.34 0.63 1.0" pos="0 0 0"/>
-        </body>
-      </body>
     </body>
   </worldbody>
 
@@ -85,15 +74,20 @@
     <!-- LiDAR -->
     <rangefinder name="laser" site="rf" cutoff="3.0"/>
 
-    <!-- IMU -->
-    <accelerometer name="accelerometer" site="imu"/>
-    <gyro           name="gyro"          site="imu"/>
-    <velocimeter    name="velocimeter"   site="imu"/>
+    <!-- rangefinder -->
+    <rangefinder name="rf_front" site="rf_front_site"/>
+
+    <!-- ===== Wheel encoders ===== -->
+    <jointpos name="enc_left_pos"  joint="wheel_left_joint"/>
+    <jointpos name="enc_right_pos" joint="wheel_right_joint"/>
+
+    <jointvel name="enc_left_vel"  joint="wheel_left_joint"/>
+    <jointvel name="enc_right_vel" joint="wheel_right_joint"/>
   </sensor>
 
   <!-- Actuator -->
   <actuator>
-    <velocity name="wheel_left_actuator" ctrllimited="true" ctrlrange="-30.0 30.0" gear="1" kv="1.0" joint="wheel_left_joint" />
-    <velocity name="wheel_right_actuator" ctrllimited="true" ctrlrange="-30.0 30.0" gear="1" kv="1.0" joint="wheel_right_joint" />
+    <velocity name="wheel_left_actuator" ctrllimited="true" ctrlrange="-30.0 30.0" gear="1" kv="8.0" joint="wheel_left_joint" />
+    <velocity name="wheel_right_actuator" ctrllimited="true" ctrlrange="-30.0 30.0" gear="1" kv="8.0" joint="wheel_right_joint" />
   </actuator>
 </mujoco>
