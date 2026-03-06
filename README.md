@@ -60,3 +60,7 @@ ex) "계속 직진해."
 • **YOLO** - 객체 인식
 
 • **LiDAR(Rangefinder), Wheel Encoder 센서** - 환경 정보 추정 및 로봇 정밀 제어
+
+## 실행 방법
+
+scripts의 tb3_vla.py를 실행
