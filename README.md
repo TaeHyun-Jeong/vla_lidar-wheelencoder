@@ -39,7 +39,9 @@ ex) "계속 직진해."
 
 1. 오른쪽으로 60도 회전 후 전방 거리 측정
 2. 왼쪽으로 60도 회전 후 전방 거리 측정
-3. 두 측정된 거리를 비교하여 다음 action 결정 -> 가능한 action: turn left(90), turn right(90), turn back(180)
+3. 두 측정된 거리를 비교하여 다음 action 결정
+  
+   가능한 action: turn left(90), turn right(90), turn back(180)
    
 동작을 마친 로봇은 다시 사용자의 명령을 이어서 수행합니다.
 
